@@ -2,7 +2,8 @@
     "C_Cpp.default.cppStandard": "c++17",
     "C_Cpp.default.cStandard": "c11",
     "C_Cpp.clang_format_fallbackStyle": "Google",
-    "doxdocgen.generic.authorEmail": "allandemiranda@gmail.com",
-    "doxdocgen.generic.authorName": "Allan de Miranda Silva",
-    "doxdocgen.generic.dateFormat": "DD-MM-YYYY"
+    "doxdocgen.generic.authorEmail": "",
+    "doxdocgen.generic.authorName": "Allan de Miranda Silva and Odilon Júlio dos Santos",
+    "doxdocgen.generic.dateFormat": "DD-MM-YYYY",
+    "doxdocgen.generic.authorTag": "@author {author} "
 }

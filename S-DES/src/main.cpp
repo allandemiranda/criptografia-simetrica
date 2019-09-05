@@ -1,12 +1,12 @@
 /**
  * @file main.cpp
- * @author Allan de Miranda
- * @brief
+ * @author Allan de Miranda Silva and Odilon Júlio dos Santos 
+ * @brief 
  * @version 0.1
- * @date 2019-08-30
- *
+ * @date 05-09-2019
+ * 
  * @copyright Copyright (c) 2019
- *
+ * 
  */
 
 #include "KeyGenerate.h"

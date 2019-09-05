@@ -170,7 +170,7 @@ std::string SubKeyGenerate::keyRight(std::string key) {
 /**
  * @brief Função para mover o código para esquerda
  *
- * @param repetition Quantridade de trocas
+ * @param repetition Quantidade de trocas
  * @param key Chave de entrada
  * @return std::string Chave de saída
  */

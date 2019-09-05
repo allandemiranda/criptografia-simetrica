@@ -21,7 +21,7 @@
 /**
  * @brief Construct a new Key Generate:: Key Generate object
  *
- * @param keySize Tamanho da chake em bit's a ser gerada
+ * @param keySize Tamanho da chave em bit's a ser gerada
  * @param optionPath Configuração avançada de local para salvar chave gerada
  */
 KeyGenerate::KeyGenerate(unsigned long keySize, std::string optionPath) {
@@ -99,6 +99,6 @@ void KeyGenerate::createKeyFile(std::string keyMaster, std::string keyPath) {
     }
     newFile.close();
   } catch (std::ifstream::failure e) {
-    std::cerr << "Erro ao criar arquivo da chave --> " <<  keyPath << std::endl;
+    std::cerr << "Erro ao criar arquivo da chave --> " << keyPath << std::endl;
   }
 }
