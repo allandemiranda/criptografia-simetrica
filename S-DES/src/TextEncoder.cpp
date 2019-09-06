@@ -176,3 +176,25 @@ std::string TextEncoder::txtRight(std::string key) {
   }
   return newKeyRight;
 }
+
+/**
+ * @brief Operação xor para duas chaves
+ * 
+ * @param textCode Chave inicial
+ * @param subKey Chave secindária
+ * @return std::string Chave final da operação xor
+ */
+std::string TextEncoder::operationXor(std::string textCode, std::string subKey){
+  if(textCode.size() != subKey.size()){
+    throw "Impossivel a realização da oreração XOR, chaves de tamanho diferente";
+  }
+  std::string finaltextCode;
+  for(auto i(0u); i<textCode.size(); ++i){
+    if(textCode[i] == subKey[i]){
+      finaltextCode.push_back('0');
+    } else {
+      finaltextCode.push_back('1');
+    }
+  }
+  return finaltextCode;
+}

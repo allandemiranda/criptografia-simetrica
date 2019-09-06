@@ -31,10 +31,11 @@ class TextEncoder {
   std::string manipulateP(std::string&, std::vector<unsigned long>&);
   std::string txtLeft(std::string);
   std::string txtRight(std::string);
-  std::string operationXor(std::string);
+  std::string operationXor(std::string, std::string);
 
  public:
-  TextEncoder(std::vector<std::string>, std::string, std::string, std::string, std::string);
+  TextEncoder(std::vector<std::string>, std::string, std::string, std::string,
+              std::string);
   ~TextEncoder();
 };
 
