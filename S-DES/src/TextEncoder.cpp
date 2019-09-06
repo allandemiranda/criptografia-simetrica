@@ -16,6 +16,15 @@
 #include <iostream>
 #include <string>
 
+/**
+ * @brief Construct a new Text Encoder:: Text Encoder object
+ * 
+ * @param keys Sub chaves geradas
+ * @param path Local do arquivo com o texto original
+ * @param newInitialPermutation Nova inicial permutação
+ * @param newFinalPermutation Nova secundária permutação
+ * @param newEP Nova EP permutação
+ */
 TextEncoder::TextEncoder(std::vector<std::string> keys, std::string path,
                          std::string newInitialPermutation,
                          std::string newFinalPermutation, std::string newEP) {
@@ -52,7 +61,7 @@ TextEncoder::TextEncoder(std::vector<std::string> keys, std::string path,
     for (auto j(0u); j < keys.size(); ++j) {
       std::string tempBinaryTextF = txtRight(tempBinaryText);
       tempBinaryTextF = manipulateP(tempBinaryTextF, EPVector);
-      // operação xor com a chave do i
+      tempBinaryTextF = operationXor(tempBinaryTextF, keys[j])
       // Sbox com os dois lados de tempF
       // manipulaçao com P4
       // operação xor com a tempBinaryText e tempBinaryTextF
