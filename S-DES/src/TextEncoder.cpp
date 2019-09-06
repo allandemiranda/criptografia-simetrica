@@ -31,10 +31,14 @@ TextEncoder::TextEncoder(std::vector<std::string> keys, std::string path,
   std::string binaryText = getText(path);
   initialPermutationVector = explode(initialPermutation);
   finalPermutationVector = explode(finalPermutation);
+  EPVector = explode(EP);
   if (!checkPermutationVector(keys[0].size(), initialPermutationVector)) {
     throw "Incompatibilidade entre o tamanho da chave e a configuração de criação";
   }
   if (!checkPermutationVector(keys[0].size(), finalPermutationVector)) {
+    throw "Incompatibilidade entre o tamanho da chave e a configuração de criação";
+  }
+  if (!checkPermutationVector(keys[0].size(), EPVector)) {
     throw "Incompatibilidade entre o tamanho da chave e a configuração de criação";
   }
 
@@ -45,10 +49,20 @@ TextEncoder::TextEncoder(std::vector<std::string> keys, std::string path,
       tempBinaryText.push_back(binaryText[(i * keys[0].size()) + j]);
     }
     tempBinaryText = manipulateP(tempBinaryText, initialPermutationVector);
-    for(auto j(0u); j<keys.size(); ++j){
-
+    for (auto j(0u); j < keys.size(); ++j) {
+      std::string tempBinaryTextF = txtRight(tempBinaryText);
+      tempBinaryTextF = manipulateP(tempBinaryTextF, EPVector);
+      // operação xor com a chave do i
+      // Sbox com os dois lados de tempF
+      // manipulaçao com P4
+      // operação xor com a tempBinaryText e tempBinaryTextF
+      //// Se j + 1 != keys.size()
+      //////// salve o tempBinaryTextF em cima de tempBinaryText trocando direita por esquerda (SW)
+      //////// [else] aquipe IP-1 no tempBinaryTextF e salve tempBinaryTextF em cima de tempBinaryText
     }
+    // adicione tempBinaryText ao finalBinaryText
   }
+  // Salve o finalBinaryText em um aquivo de texto
 }
 
 TextEncoder::~TextEncoder() {}
@@ -161,8 +175,4 @@ std::string TextEncoder::txtRight(std::string key) {
     newKeyRight.push_back(key[i]);
   }
   return newKeyRight;
-}
-
-std::string TextEncoder::operationXor(std::string text, std::string key){
-    
 }

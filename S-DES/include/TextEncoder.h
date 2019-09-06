@@ -25,6 +25,7 @@ class TextEncoder {
   std::string finalPermutation = "4 1 3 5 7 2 8 6";
   std::vector<unsigned long> initialPermutationVector;
   std::vector<unsigned long> finalPermutationVector;
+  std::vector<unsigned long> EPVector;
   const std::vector<unsigned long> explode(const std::string&);
   bool checkPermutationVector(unsigned long, std::vector<unsigned long>&);
   std::string manipulateP(std::string&, std::vector<unsigned long>&);
