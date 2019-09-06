@@ -23,6 +23,7 @@ class TextEncoder {
   std::string EP = "4 1 2 3 2 3 4 1";
   std::string initialPermutation = "2 6 3 1 4 8 5 7";
   std::string finalPermutation = "4 1 3 5 7 2 8 6";
+  std::string sBoxOne = "1 0 3 2 "; // TERMINAR O SBOX
   std::vector<unsigned long> initialPermutationVector;
   std::vector<unsigned long> finalPermutationVector;
   std::vector<unsigned long> EPVector;
