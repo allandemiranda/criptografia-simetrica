@@ -36,8 +36,8 @@ OpenFile::~OpenFile(void) {}
  * @return std::string Texto contido na linha solicitada
  */
 std::string OpenFile::getLine(unsigned long lineNumber) {
-  if (lineNumber > getSizeText()) {
-    throw "Linha solicitada maior que tamanho do texto";
+  if ((lineNumber == 0) or (lineNumber > getSizeText())) {
+    throw "Linha solicitada está fora do tamanho do texto";
   } else {
     return text[lineNumber - 1];
   }
