@@ -1,13 +1,3 @@
-//**
- * @file RC4.cpp
- * @author Odilon Júlio dos Santos (odilonjulio@ufrn.edu.br)
- * @brief 
- * @version 0.1
- * @date 2019-09-06
- * 
- * @copyright Copyright (c) 2019
- * 
- */
 
 #include "RC4.h"
 #include <iostream>
@@ -28,7 +18,7 @@ RC4::iniciarRC4(unsigned char* pChave, unsigned int tamanhoChave) {
   }
 
   for (i = 0; i < 256; i++) {
-    j = (j + m_sBox[i] + pChave[i % lenKey]) % 256;
+    j = (j + m_sBox[i] + pChave[i % tamanhoChave]) % 256;
     troca = m_sBox[i];
     m_sBox[i] = m_sBox[j];
     m_sBox[i] = troca;

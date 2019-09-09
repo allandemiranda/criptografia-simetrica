@@ -1,13 +1,4 @@
-//**
- * @file RC4.h
- * @author Odilon Júlio dos Santos (odilonjulio@ufrn.edu.br)
- * @brief 
- * @version 0.1
- * @date 2019-09-06
- * 
- * @copyright Copyright (c) 2019
- * 
- */
+
 #ifndef _RC4_H_
 #define _RC4_H_
 
