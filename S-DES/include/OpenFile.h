@@ -12,8 +12,8 @@
 #ifndef OPENFILE_H_
 #define OPENFILE_H_
 
-#include <string>
-#include <vector>
+#include <string>  // std::string
+#include <vector>  // std::vector
 
 class OpenFile {
  private:
