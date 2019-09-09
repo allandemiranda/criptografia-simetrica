@@ -20,9 +20,7 @@
  *
  * @param lineText Linha do texto
  */
-TextToBinary::TextToBinary(std::string lineText) {
-    // ADICIONAR A L´OGICA AQUI !!!
-}
+TextToBinary::TextToBinary(std::string lineText) { convertToBinary(lineText); }
 
 /**
  * @brief Destroy the Text To Binary:: Text To Binary object
