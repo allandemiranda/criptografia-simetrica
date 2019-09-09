@@ -23,7 +23,11 @@ KeyGeneration::KeyGeneration(std::string key) {
   if (key.size() != 10) {
     throw "Tamanho da chave principal não é compatível";
   }
-  // ADICIONAR LóGICA AQUI
+  key = permutation(key, P10);
+  key = LS(keyLeft(key), 1) + LS(keyRight(key), 1);
+  keys.push_back(permutation(key, P8));
+  key = LS(keyLeft(key), 2) + LS(keyRight(key), 2);
+  keys.push_back(permutation(key, P8));
 }
 
 /**
@@ -90,4 +94,18 @@ std::string KeyGeneration::keyRight(std::string key) {
     finalKey.push_back(key[i]);
   }
   return finalKey;
+}
+
+/**
+ * @brief Obter chave gerada
+ *
+ * @param number Número da chave
+ * @return std::string Chave gerada
+ */
+std::string KeyGeneration::getKey(unsigned int number) {
+  if ((number == 0) or (number > 2)) {
+    throw "Número de chave solicitada inválida";
+  } else {
+    return keys[number - 1];
+  }
 }

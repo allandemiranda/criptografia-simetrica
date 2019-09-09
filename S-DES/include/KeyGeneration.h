@@ -24,6 +24,7 @@ class KeyGeneration {
   std::string LS(std::string, unsigned int);                        // LS
   std::string keyRight(std::string);  // Parte direita da chave
   std::string keyLeft(std::string);   // Parte esquerda da chave
+  std::vector<std::string> keys;
 
  public:
   std::string getKey(unsigned int);  // Obter chave
