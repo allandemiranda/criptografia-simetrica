@@ -19,11 +19,12 @@
 
 class Encode : public FunctionDes {
  private:
-  void process(std::string);   // Processamento de codificação
+  void process(std::string, std::string,
+               std::string);   // Processamento de codificação
   std::string finalPlaintext;  // Código de 8-bit codificado
  public:
   std::string getFinalPlaintext(void);  // Obter código codificado
-  Encode(std::string);
+  Encode(std::string, std::string, std::string);
   ~Encode(void);
 };
 

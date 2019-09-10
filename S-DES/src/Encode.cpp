@@ -15,8 +15,12 @@
  * @brief Construct a new Encode:: Encode object
  *
  * @param plaintext Texto binário de entrada de 8-bit
+ * @param keyOne Sub chave um
+ * @param keyTwo Sub chave dois
  */
-Encode::Encode(std::string plaintext) { process(plaintext); }
+Encode::Encode(std::string plaintext, std::string keyOne, std::string keyTwo) {
+  process(plaintext, keyOne, keyTwo);
+}
 
 /**
  * @brief Destroy the Encode:: Encode object
@@ -36,11 +40,34 @@ std::string Encode::getFinalPlaintext(void) { return finalPlaintext; }
  *
  * @param textBinary Texto de entrada para codificação
  */
-void Encode::process(std::string textBinary) {
+void Encode::process(std::string textBinary, std::string keyOne,
+                     std::string keyTwo) {
   if (textBinary.size() != 8) {
     throw "Tamanho do texto de entrada para codificação é incompatível";
   } else {
     textBinary = permutation(textBinary, IP);
-    // CONTINUAR AQUI
+
+    std::string half = keyRight(textBinary);
+    half = permutation(half, EP);                               // (1)
+    half = xorOperation(half, keyOne);                          // (2)
+    half = sBox(keyLeft(half), S0) + sBox(keyRight(half), S1);  // (3)
+    half = permutation(half, P4);                               // (4)
+
+    textBinary = keyRight(textBinary) +
+                 xorOperation(half, keyLeft(textBinary));  // (5) (6) (7)
+
+    std::string halfSecond = keyRight(textBinary);
+    halfSecond = permutation(halfSecond, EP);       // (1)
+    halfSecond = xorOperation(halfSecond, keyOne);  // (2)
+    halfSecond =
+        sBox(keyLeft(halfSecond), S0) + sBox(keyRight(halfSecond), S1);  // (3)
+    halfSecond = permutation(halfSecond, P4);                            // (4)
+
+    textBinary = xorOperation(halfSecond, keyLeft(textBinary)) +
+                 keyRight(textBinary);  // (5) (6) (7)
+
+    textBinary = permutation(textBinary, IP1);  // (8)
+
+    finalPlaintext = textBinary;
   }
 }
