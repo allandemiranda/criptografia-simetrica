@@ -65,6 +65,14 @@ std::string FunctionDes::keyRight(std::string key) {
  */
 std::string FunctionDes::permutation(std::string key,
                                      std::vector<unsigned int> feistel) {
+  for (auto i(0u); i < feistel.size(); ++i) {
+    if (feistel[i] > key.size()) {
+      throw "Vetor Feistel contem elemento maior que tamanho da chave";
+    }
+    if (feistel[i] == 0) {
+      throw "Vetor Feistel contem elemento menor que tamanho da chave";
+    }
+  }
   std::string finalKey;
   for (unsigned int position : feistel) {
     finalKey.push_back(key[position - 1]);

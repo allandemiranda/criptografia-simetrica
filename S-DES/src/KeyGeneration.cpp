@@ -45,6 +45,14 @@ KeyGeneration::~KeyGeneration(void) {}
  */
 std::string KeyGeneration::permutation(std::string key,
                                        std::vector<unsigned int> feistel) {
+  for (auto i(0u); i < feistel.size(); ++i) {
+    if (feistel[i] > key.size()) {
+      throw "Vetor Feistel contem elemento maior que tamanho da chave";
+    }
+    if (feistel[i] == 0) {
+      throw "Vetor Feistel contem elemento menor que tamanho da chave";
+    }
+  }
   std::string finalKey;
   for (unsigned int position : feistel) {
     finalKey.push_back(key[position - 1]);
@@ -60,12 +68,16 @@ std::string KeyGeneration::permutation(std::string key,
  * @return std::string Chave final
  */
 std::string KeyGeneration::LS(std::string key, unsigned int time) {
-  for (auto i(0u); i < time; ++i) {
-    std::string last(1, key.back());  // char para string
-    key.insert(0, last);
-    key.pop_back();
+  if (time == 0) {
+    throw "A quantidade de operações de deslocamento deve ser maior que zero";
+  } else {
+    for (auto i(0u); i < time; ++i) {
+      std::string last(1, key.back());  // char para string
+      key.insert(0, last);
+      key.pop_back();
+    }
+    return key;
   }
-  return key;
 }
 
 /**
@@ -75,8 +87,9 @@ std::string KeyGeneration::LS(std::string key, unsigned int time) {
  * @return std::string Lado esquerdo da chave inicial
  */
 std::string KeyGeneration::keyLeft(std::string key) {
+  unsigned int sizeKey = key.size();
   std::string finalKey;
-  for (auto i(0u); i < 5; ++i) {
+  for (auto i(0u); i < (sizeKey / 2); ++i) {
     finalKey.push_back(key[i]);
   }
   return finalKey;
@@ -89,8 +102,9 @@ std::string KeyGeneration::keyLeft(std::string key) {
  * @return std::string Lado direito da chave inicial
  */
 std::string KeyGeneration::keyRight(std::string key) {
+  unsigned int sizeKey = key.size();
   std::string finalKey;
-  for (auto i(5u); i < 10; ++i) {
+  for (auto i(sizeKey / 2); i < sizeKey; ++i) {
     finalKey.push_back(key[i]);
   }
   return finalKey;
