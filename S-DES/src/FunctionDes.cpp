@@ -33,8 +33,9 @@ FunctionDes::~FunctionDes(void) {}
  * @return std::string Lado esquerdo da chave inicial
  */
 std::string FunctionDes::keyLeft(std::string key) {
+  unsigned int sizeKey = key.size();
   std::string finalKey;
-  for (auto i(0u); i < 5; ++i) {
+  for (auto i(0u); i < (sizeKey / 2); ++i) {
     finalKey.push_back(key[i]);
   }
   return finalKey;
@@ -47,8 +48,9 @@ std::string FunctionDes::keyLeft(std::string key) {
  * @return std::string Lado direito da chave inicial
  */
 std::string FunctionDes::keyRight(std::string key) {
+  unsigned int sizeKey = key.size();
   std::string finalKey;
-  for (auto i(5u); i < 10; ++i) {
+  for (auto i(sizeKey / 2); i < sizeKey; ++i) {
     finalKey.push_back(key[i]);
   }
   return finalKey;
@@ -92,3 +94,73 @@ std::string FunctionDes::xorOperation(std::string epKey, std::string subKey) {
     return finalXor;
   }
 }
+
+/**
+ * @brief Obter o sistema sBox na chave
+ *
+ * @param key Chave inical
+ * @param sBox
+ * @return std::string
+ */
+std::string FunctionDes::sBox(std::string key,
+                              std::vector<std::vector<unsigned int>> sBox) {
+  if (key.size() != 4) {
+    throw "Tamanho da chave é incompatível com a operação";
+  } else {
+    std::string lineSBOX = keyLeft(key);
+    unsigned int numberLine;
+    std::string colSBOX = keyRight(key);
+    unsigned int numberCol;
+    if (lineSBOX == "00") {
+      numberLine = 0;
+    } else {
+      if (lineSBOX == "01") {
+        numberLine = 1;
+      } else {
+        if (lineSBOX == "10") {
+          numberLine = 2;
+        } else {
+          if (lineSBOX == "11") {
+            numberLine = 3;
+          } else {
+            throw "Erro ao tentar achar o par no sBox";
+          }
+        }
+      }
+    }
+    if (colSBOX == "00") {
+      numberCol = 0;
+    } else {
+      if (colSBOX == "01") {
+        numberCol = 1;
+      } else {
+        if (colSBOX == "10") {
+          numberCol = 2;
+        } else {
+          if (colSBOX == "11") {
+            numberCol = 3;
+          } else {
+            throw "Erro ao tentar achar o par no sBox";
+          }
+        }
+      }
+    }
+    unsigned int numberSBox = sBox[numberLine][numberCol];
+    if (numberSBox == 0) {
+      return "00";
+    } else {
+      if (numberSBox == 1) {
+        return "01";
+      } else {
+        if (numberSBox == 2) {
+          return "10";
+        } else {
+          if (numberSBox == 3) {
+            return "11";
+          } else {
+            throw "Erro ao tentar achar o par no sBox";
+          }
+        }
+      }
+    }
+  }

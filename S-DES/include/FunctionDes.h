@@ -32,6 +32,8 @@ class FunctionDes {
   std::string xorOperation(std::string, std::string);  // Operação xor
   std::string keyRight(std::string);                   // Parte direita da chave
   std::string keyLeft(std::string);  // Parte esquerda da chave
+  std::string sBox(std::string,
+                   std::vector<std::vector<unsigned int>>);  // Permutação sBox
 
  public:
   FunctionDes(void);
