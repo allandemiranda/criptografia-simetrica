@@ -21,7 +21,7 @@
  * @param textBinary Texto em binário
  */
 BinaryToText::BinaryToText(std::string textBinary) {
-    // ADICIONAR LÓGICA AQUI
+  convertToText(textBinary);
 }
 
 /**
