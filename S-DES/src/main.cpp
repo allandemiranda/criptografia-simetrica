@@ -9,16 +9,19 @@
  *
  */
 
-#include "OpenFile.h"
+#include "BinaryToText.h"
+#include "Decode.h"
+#include "Encode.h"
 #include "KeyGeneration.h"
+#include "OpenFile.h"
+#include "SaveBinaryFile.h"
 #include "TextToBinary.h"
 
 #include <iostream>
-#include <string>
-#include <vector>
+#include <string>  // std::string
 
-std::string codificar(std::string);    // Codifiar texto
-std::string decodificar(std::string);  // Decodificar texto binário
+void codificar(std::string);    // Codifiar texto
+void decodificar(std::string);  // Decodificar texto binário
 
 int main(int argc, char const *argv[]) {
   /* code */
@@ -31,11 +34,52 @@ int main(int argc, char const *argv[]) {
  * @param caminho Caminho do arquivo com o texto
  * @return std::string Texto codificado
  */
-std::string codificar(std::string caminho) {     
-    OpenFile chavePrincipal("data/key.des");
-    KeyGeneration subChaves(chavePrincipal.getLine(1));
+void codificar(std::string caminho) {
+  OpenFile chavePrincipal("data/key.des");
+  KeyGeneration subChaves(chavePrincipal.getLine(1));
 
-    OpenFile arquivoTexto(caminho);
-    TextToBinary arquivoEmBinario();
+  OpenFile arquivoTexto(caminho);
+  std::string textoEmBinario;
+  for (auto i(0u); i < arquivoTexto.getSizeText(); ++i) {
+    TextToBinary paraBinario(arquivoTexto.getLine(i + 1));
+    textoEmBinario += paraBinario.getBinary();
+  }
 
+  std::string textoCodficado;
+  for (auto i(0u); i < (textoEmBinario.size() / 8); ++i) {
+    std::string tempBinario;
+    for (auto j(0u); j < 8; ++j) {
+      tempBinario.push_back(textoEmBinario[(i * 8) + j]);
+    }
+    Encode codificado(tempBinario, subChaves.getKey(1), subChaves.getKey(2));
+    textoCodficado += codificado.getFinalPlaintext();
+  }
+
+  SaveBinaryFile salvarBinario(textoCodficado);
+}
+
+/**
+ * @brief Função para decodificar texto de um arquivo
+ *
+ * @param caminho Caminho do arquivo codificado
+ */
+void decodificar(std::string caminho) {
+  OpenFile chavePrincipal("data/key.des");
+  KeyGeneration subChaves(chavePrincipal.getLine(1));
+
+  OpenFile arquivoBinario(caminho);
+  std::string arquivoBinarioDecodificado;
+  for (auto i(0u); i < (arquivoBinario.getLine(1).size() / 8); ++i) {
+    std::string tempBinario;
+    for (auto j(0u); j < 8; ++j) {
+      tempBinario.push_back(arquivoBinario.getLine(1)[(i * 8) + j]);
+    }
+    Decode decodificado(tempBinario, subChaves.getKey(1), subChaves.getKey(2));
+    arquivoBinarioDecodificado += decodificado.getFinalPlaintext();
+  }
+
+  BinaryToText textoFinal(arquivoBinarioDecodificado);
+  for (auto i(0u); i < textoFinal.getSizeText(); ++i) {
+    std::cout << textoFinal.getLine(i + 1) << std::endl;
+  }
 }

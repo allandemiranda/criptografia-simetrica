@@ -113,7 +113,7 @@ std::string KeyGeneration::keyRight(std::string key) {
 /**
  * @brief Obter chave gerada
  *
- * @param number Número da chave
+ * @param number Número da chave (1 ou 2)
  * @return std::string Chave gerada
  */
 std::string KeyGeneration::getKey(unsigned int number) {
