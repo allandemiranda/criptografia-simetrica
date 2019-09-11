@@ -172,3 +172,4 @@ std::string FunctionDes::sBox(std::string key,
       }
     }
   }
+}
