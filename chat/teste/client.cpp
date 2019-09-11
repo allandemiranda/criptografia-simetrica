@@ -1,4 +1,7 @@
 
+#include <string>
+#include <iostream>
+
 // Client side C/C++ program to demonstrate Socket programming
 #include <arpa/inet.h>
 #include <stdio.h>
@@ -31,8 +34,10 @@ int main(int argc, char const *argv[]) {
     return -1;
   }
   while (true) {
-    valread = read(sock, buffer, 1024);
-    printf("%s\n", buffer);
+    std::string aaa;
+    std::cin >> aaa;
+    const char *hello = aaa.c_str();
+    send(sock, hello, strlen(hello), 0);
   }
 
   // send(sock, hello, strlen(hello), 0);

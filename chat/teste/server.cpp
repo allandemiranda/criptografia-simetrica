@@ -1,6 +1,6 @@
 
-#include <string>
 #include <iostream>
+#include <string>
 // Server side C/C++ program to demonstrate Socket programming
 #include <netinet/in.h>
 #include <stdio.h>
@@ -16,7 +16,7 @@ int main(int argc, char const *argv[]) {
   int opt = 1;
   int addrlen = sizeof(address);
   char buffer[1024] = {0};
-  //char *hello = "Hello from server";
+  // char *hello = "Hello from server";
 
   // Creating socket file descriptor
   if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
@@ -53,10 +53,8 @@ int main(int argc, char const *argv[]) {
   // send(new_socket, hello, strlen(hello), 0);
   // printf("Hello message sent\n");
   while (true) {
-    std::string aaa;
-    std::cin >> aaa;
-    const char *hello = aaa.c_str();
-    send(new_socket, hello, strlen(hello), 0);
+    valread = read(new_socket, buffer, 1024);
+    printf("%s\n", buffer);
   }
 
   return 0;
