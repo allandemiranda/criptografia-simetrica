@@ -15,7 +15,7 @@ int main(int argc, char const *argv[]) {
   struct sockaddr_in address;
   int opt = 1;
   int addrlen = sizeof(address);
-  char buffer[1024] = {0};
+  // char buffer[1024] = {0};
   // char *hello = "Hello from server";
 
   // Creating socket file descriptor
@@ -53,6 +53,7 @@ int main(int argc, char const *argv[]) {
   // send(new_socket, hello, strlen(hello), 0);
   // printf("Hello message sent\n");
   while (true) {
+    char buffer[1024] = {0};
     valread = read(new_socket, buffer, 1024);
     printf("%s\n", buffer);
   }
