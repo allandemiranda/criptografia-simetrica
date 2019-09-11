@@ -1,4 +1,6 @@
 
+#include <string>
+#include <iostream>
 // Server side C/C++ program to demonstrate Socket programming
 #include <netinet/in.h>
 #include <stdio.h>
@@ -46,9 +48,16 @@ int main(int argc, char const *argv[]) {
     perror("accept");
     exit(EXIT_FAILURE);
   }
-  valread = read(new_socket, buffer, 1024);
-  printf("%s\n", buffer);
-  send(new_socket, hello, strlen(hello), 0);
-  printf("Hello message sent\n");
+  // valread = read(new_socket, buffer, 1024);
+  // printf("%s\n", buffer);
+  // send(new_socket, hello, strlen(hello), 0);
+  // printf("Hello message sent\n");
+  while (true) {
+    std::string aaa;
+    std::cin >> aaa;
+    const char *hello = aaa.c_str();
+    send(new_socket, hello, strlen(hello), 0);
+  }
+
   return 0;
 }
