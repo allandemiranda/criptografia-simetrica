@@ -15,7 +15,6 @@
 #include "FunctionDes.h"
 
 #include <string>  // std::string
-#include <vector>  // std::vector
 
 class Encode : public FunctionDes {
  private:
