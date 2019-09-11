@@ -71,7 +71,7 @@ int main(int argc, char const *argv[]) {
             // return -1;
           }
           char *hello;
-          std::cin >> *hello;          
+          std::cin >> hello;          
           send(sock, hello, strlen(hello), 0);
         }
       }
