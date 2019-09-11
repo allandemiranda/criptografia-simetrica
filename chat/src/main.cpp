@@ -18,6 +18,7 @@
 #include "TextToBinary.h"
 
 #include <iostream>  // std::cout , std::endl
+#include <string>
 
 #include <arpa/inet.h>
 #include <netinet/in.h>
@@ -69,7 +70,8 @@ int main(int argc, char const *argv[]) {
             // printf("\nConnection Failed \n");
             // return -1;
           }
-          char *hello = "hoje sim";
+          char *hello;
+          std::cin >> *hello;          
           send(sock, hello, strlen(hello), 0);
         }
       }
