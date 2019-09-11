@@ -19,9 +19,9 @@
 /**
  * @brief Construct a new Open File:: Open File object
  *
- * @param fineName Caminho do arquivo
+ * @param fileName Caminho do arquivo
  */
-OpenFile::OpenFile(std::string fineName) {}
+OpenFile::OpenFile(std::string fileName) { getText(fileName); }
 
 /**
  * @brief Destroy the Open File:: Open File object
@@ -59,11 +59,11 @@ unsigned long OpenFile::getSizeText(void) {
 /**
  * @brief Obter texto do aquivo
  *
- * @param fineName Caminho do arquivo
+ * @param fileName Caminho do arquivo
  */
-void OpenFile::getText(std::string fineName) {
+void OpenFile::getText(std::string fileName) {
   try {
-    std::ifstream file(fineName);
+    std::ifstream file(fileName);
     std::string line;
     while (std::getline(file, line)) {
       text.push_back(line);

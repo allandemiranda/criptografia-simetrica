@@ -11,6 +11,9 @@
 
 #include "SaveBinaryFile.h"
 
+#include <fstream>   // std::ofstream
+#include <iostream>  // std::cerr & std::endl
+
 /**
  * @brief Construct a new Save Text File:: Save Text File object
  *

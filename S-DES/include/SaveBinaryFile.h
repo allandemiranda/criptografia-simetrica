@@ -12,8 +12,6 @@
 #ifndef SAVEBINARYFILE_H_
 #define SAVEBINARYFILE_H_
 
-#include <fstream>   // std::ofstream
-#include <iostream>  // std::cerr & std::endl
 #include <string>    // std::string
 
 class SaveBinaryFile {
