@@ -26,13 +26,9 @@ void decodificar(std::string);  // Decodificar texto binário
 /**
  * @brief Função menu
  *
- * @param argc Quantidade de parãmetros recebidos
+ * @param argc Quantidade de parâmetros recebidos
  * @param argv Parâmetros recebidos
- * @return int 0 WARNING Programa não execultou
- * @return int 1 ERROR Argumntos não digitados corretamente
- * @return int 2 ERROR Opção inválida
- * @return int 3 SUCCESS Arquivo codificado
- * @return int 4 SUCCESS Arquivo decodificado
+ * @return int
  */
 int main(int argc, char const *argv[]) {
   std::string a = "";
