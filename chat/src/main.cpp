@@ -70,8 +70,9 @@ int main(int argc, char const *argv[]) {
             // printf("\nConnection Failed \n");
             // return -1;
           }
-          char *hello;
-          std::cin >> hello;          
+          std::string aaa;
+          std::cin >> aaa;  
+          const char *hello = aaa.c_str();
           send(sock, hello, strlen(hello), 0);
         }
       }
