@@ -47,7 +47,9 @@ int main(int argc, char const *argv[]) {
       return 3;
     } else {
       if (opcao == "decodificar") {
+        std::cout << std::endl;
         decodificar(caminho);
+        std::cout << std::endl;
         return 4;
       } else {
         std::cout << "Erro! Digite uma opção válida" << std::endl;
