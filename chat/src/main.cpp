@@ -116,6 +116,7 @@ int main(int argc, char const *argv[]) {
             perror("accept");
             exit(EXIT_FAILURE);
           }
+          std::cout  << "aqui" << std::endl;
           valread = read(new_socket, buffer, 1024);
           printf("%s\n", buffer);
         }
