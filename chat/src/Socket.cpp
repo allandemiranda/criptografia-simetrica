@@ -107,7 +107,7 @@ void Socket::startSubmit(char const *ipAdr) {
   }
   serv_addr.sin_family = AF_INET;
   serv_addr.sin_port = htons(PORT);
-  std::cout << "Estabelecendo conexão com outro usuário de ip " << ipAdr
+  std::cout << "Estabelecendo conexão com outro usuário de ip " << ipAdr << ":"
             << PORT << std::endl;
   if (inet_pton(AF_INET, ipAdr, &serv_addr.sin_addr) <= 0) {
     throw "Invalid address/ Address not supported";
@@ -127,3 +127,19 @@ void Socket::startSubmit(char const *ipAdr) {
 void Socket::submit(std::string msg) {
   send(sock, msg.c_str(), strlen(msg.c_str()), 0);
 }
+
+// /**
+//  * @brief Obter novo tipo de criptografia
+//  *
+//  * @return std::string Tipo de criptografia
+//  */
+// std::string Socket::getEncryption(void) { return encryption; }
+
+// /**
+//  * @brief Modificar tipo de criptografia
+//  *
+//  * @param newsetEncryption Novo tipo de criptografia
+//  */
+// void Socket::setEncryption(std::string newsetEncryption) {
+//   encryption = newsetEncryption;
+// }

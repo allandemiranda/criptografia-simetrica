@@ -29,7 +29,9 @@ class Socket {
   struct sockaddr_in serv_addr;
   // porta
   unsigned long PORT = 5354;
-  std::string statusReceiverNow = "off";
+  std::string statusReceiverNow = "on";
+  // Criptografia
+  // std::string encryption = "OFF";
 
  public:
   void startReceive(void);
@@ -37,6 +39,8 @@ class Socket {
   std::string getStatusReceive(void);
   void startSubmit(char const *);
   void submit(std::string);
+  // std::string getEncryption(void);
+  // void setEncryption(std::string);
   Socket(unsigned long);
   ~Socket(void);
 };

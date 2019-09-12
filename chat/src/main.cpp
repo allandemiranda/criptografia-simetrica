@@ -9,18 +9,12 @@
  *
  */
 
-#include "BinaryToText.h"
-#include "Decode.h"
-#include "Encode.h"
-#include "KeyGeneration.h"
-#include "OpenFile.h"
-#include "SaveBinaryFile.h"
-#include "Socket.h"
-#include "TextToBinary.h"
-
 #include <omp.h>     // omp parallel
 #include <iostream>  // std::cin, std::endl, std::cout
 #include <string>    // std::string
+
+#include "CryptionSelect.h"
+#include "Socket.h"
 
 /**
  * @brief Função menu
@@ -36,6 +30,7 @@ int main(int argc, char const *argv[]) {
     return 1;
   }
   Socket novoSocket(5354);
+  //CryptionSelect emUso(void);
 #pragma omp parallel
   {
 #pragma omp sections
@@ -47,17 +42,20 @@ int main(int argc, char const *argv[]) {
         while (novoSocket.getStatusReceive() == "on") {
           std::string novaMsg = novoSocket.receive();
           std::cout << "Parceiro: " << novaMsg << std::endl;
+          // if(emUso().analyzeMsgReceive(novaMsg)){
+          //   if(emUso().setType(novaMsg)){
+          //     novoSocket.submit(mensagem);
+          //   }
+          // }
         }
         std::cout << "Chat fechado pelo Parceiro" << std::endl;
+        std::cout << "Digite qualquer tecla apra sair..." << std::endl;
       }
 #pragma omp section
       {
         // Envia a mensagem
         novoSocket.startSubmit(argv[1]);
-        while (true) {
-          if (novoSocket.getStatusReceive() == "off") {
-            break;
-          }
+        while (novoSocket.getStatusReceive() == "on") {
           std::string mensagem;
           std::getline(std::cin, mensagem);
           novoSocket.submit(mensagem);

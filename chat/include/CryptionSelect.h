@@ -22,10 +22,12 @@ class CryptionSelect {
   std::vector<std::string> explode(const std::string&);
   bool binaryOnly(std::string);
   bool rulesDes(std::string);
-  bool rulesRC4(std::string);
 
  public:
+  std::string encode(std::string);
+  std::string decode(std::string);
   bool analyzeMsgReceive(std::string);
+  bool setType(std::string);
   CryptionSelect(void);
   ~CryptionSelect(void);
 };
