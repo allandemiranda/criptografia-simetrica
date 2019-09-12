@@ -108,7 +108,7 @@ void Socket::startSubmit(char const *ipAdr) {
   serv_addr.sin_family = AF_INET;
   serv_addr.sin_port = htons(PORT);
   std::cout << "Estabelecendo conexão com outro usuário de ip " << ipAdr
-            << std::endl;
+            << PORT << std::endl;
   if (inet_pton(AF_INET, ipAdr, &serv_addr.sin_addr) <= 0) {
     throw "Invalid address/ Address not supported";
     printf("\nInvalid address/ Address not supported \n");
