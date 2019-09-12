@@ -9,10 +9,18 @@
  *
  */
 
-#include <omp.h>
-#include <iostream>
-
+#include "BinaryToText.h"
+#include "Decode.h"
+#include "Encode.h"
+#include "KeyGeneration.h"
+#include "OpenFile.h"
+#include "SaveBinaryFile.h"
 #include "Socket.h"
+#include "TextToBinary.h"
+
+#include <omp.h>     // omp parallel
+#include <iostream>  // std::cin, std::endl, std::cout
+#include <string>    // std::string
 
 /**
  * @brief Função menu
@@ -20,8 +28,13 @@
  * @param argc Quantidade de parãmetros recebidos
  * @param argv Parâmetros recebidos
  * @return int 0 SUCCESS
+ * @return int 1 ERROR Argumntos não digitados corretamente
  */
 int main(int argc, char const *argv[]) {
+  if (argc != 2) {
+    std::cout << "Erro! Digitar os argumentos corretamente." << std::endl;
+    return 1;
+  }
   Socket novoSocket(5354);
 #pragma omp parallel
   {
