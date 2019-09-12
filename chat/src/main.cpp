@@ -30,7 +30,7 @@ int main(int argc, char const *argv[]) {
     return 1;
   }
   Socket novoSocket(5354);
-  //CryptionSelect emUso(void);
+  CryptionSelect emUso(void);
 #pragma omp parallel
   {
 #pragma omp sections
