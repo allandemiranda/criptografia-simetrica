@@ -54,7 +54,6 @@ int main(int argc, char const *argv[]) {
             flagWhile = false;
             continue;
           }
-          std::cout << "valread=" << valread << std::endl;
           printf("%s\n", buffer);
         }
       }
