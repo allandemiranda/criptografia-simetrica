@@ -35,8 +35,7 @@ int main(int argc, char const *argv[]) {
           std::string novaMsg = novoSocket.receive();
           std::cout << "Parceiro: " << novaMsg << std::endl;
         }
-        std::cout << "Chat fechado" << std::endl;
-
+        std::cout << "Chat fechado pelo Parceiro" << std::endl;
       }
 #pragma omp section
       {
@@ -44,7 +43,6 @@ int main(int argc, char const *argv[]) {
         novoSocket.startSubmit(argv[1]);
         while (true) {
           if (novoSocket.getStatusReceive() == "off") {
-            std::cout << "Chat fechado pelo Parceiro" << std::endl;
             break;
           }
           std::string mensagem;
