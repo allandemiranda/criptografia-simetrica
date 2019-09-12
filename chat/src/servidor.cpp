@@ -7,12 +7,14 @@
 #include <unistd.h>
 #define PORT 8080
 
+#include <iostream>
+
 int main(int argc, char const *argv[]) {
   int server_fd, new_socket, valread;
   struct sockaddr_in address;
   int opt = 1;
   int addrlen = sizeof(address);
-  char buffer[1024] = {0};
+  // char buffer[1024] = {0};
   char *hello = "Hello from server";
 
   // Creating socket file descriptor
@@ -45,9 +47,21 @@ int main(int argc, char const *argv[]) {
     perror("accept");
     exit(EXIT_FAILURE);
   }
-  valread = read(new_socket, buffer, 1024);
-  printf("%s\n", buffer);
-  send(new_socket, hello, strlen(hello), 0);
-  printf("Hello message sent\n");
+
+  while (true) {
+    char buffer[1024] = {0};
+    valread = recv(new_socket, buffer, 1024, 0);
+    if(valread == 0){
+        break;
+    }
+    std::cout << "valread=" << valread << std::endl;
+    printf("%s\n", buffer);    
+  }
+
+  // valread = read(new_socket, buffer, 1024);
+  // printf("%s\n", buffer);
+  // send(new_socket, hello, strlen(hello), 0);
+  // printf("Hello message sent\n");
+
   return 0;
 }
