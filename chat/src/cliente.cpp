@@ -1,7 +1,3 @@
-
-#include <iostream>
-#include <string>
-
 // Client side C/C++ program to demonstrate Socket programming
 #include <arpa/inet.h>
 #include <stdio.h>
@@ -13,9 +9,9 @@
 int main(int argc, char const *argv[]) {
   int sock = 0, valread;
   struct sockaddr_in serv_addr;
-  // char *hello = "Hello from client";
-  // char buffer[1024] = {0};
-  if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+  char *hello = "Hello from client";
+  char buffer[1024] = {0};
+  if ((sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0) {
     printf("\n Socket creation error \n");
     return -1;
   }
@@ -33,17 +29,9 @@ int main(int argc, char const *argv[]) {
     printf("\nConnection Failed \n");
     return -1;
   }
-  while (true) {
-    char buffer[1024] = {0};
-    std::string aaa;
-    std::cin >> aaa;
-    const char *hello = aaa.c_str();
-    send(sock, hello, strlen(hello), 0);
-  }
-
-  // send(sock, hello, strlen(hello), 0);
-  // printf("Hello message sent\n");
-  // valread = read(sock, buffer, 1024);
-  // printf("%s\n", buffer);
+  send(sock, hello, strlen(hello), 0);
+  printf("Hello message sent\n");
+  valread = read(sock, buffer, 1024);
+  printf("%s\n", buffer);
   return 0;
 }
