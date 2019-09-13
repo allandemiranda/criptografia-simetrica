@@ -12,6 +12,8 @@
 #ifndef OPENFILE_H_
 #define OPENFILE_H_
 
+#include <fstream>   // std::ifstream
+#include <iostream>  // std::cerr
 #include <string>    // std::string
 #include <vector>    // std::vector
 

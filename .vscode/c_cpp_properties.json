@@ -6,8 +6,13 @@
                 "${workspaceFolder}/**"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/gcc",
-            "intelliSenseMode": "clang-x64"
+            "compilerPath": "/usr/bin/g++-8",
+            "intelliSenseMode": "clang-x64",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "compilerArgs": [
+                "-fopenmp"
+            ]
         }
     ],
     "version": 4
