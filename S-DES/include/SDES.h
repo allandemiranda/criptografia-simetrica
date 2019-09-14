@@ -12,9 +12,10 @@
 #ifndef SDES_H_
 #define SDES_H_
 
-#include <bitset>  // std::bitset
-#include <string>  // std::string
-#include <vector>  // std::vector
+#include <bitset>    // std::bitset
+#include <iostream>  // std::cout, std::endl
+#include <string>    // std::string
+#include <vector>    // std::vector
 #include "DecodeDes.h"
 #include "EncodeDes.h"
 #include "KeyGenerationDes.h"
@@ -44,7 +45,7 @@ SDES::SDES(std::string fileOpen, std::string fileDestination, std::string key) {
                          subChaves.getSubKey(2));
     textoCodficado.push_back(codificado.getFinalPlaintext());
   }
-  SaveBinaryFile salvarBinario(textoCodficado,fileDestination);
+  SaveBinaryFile salvarBinario(textoCodficado, fileDestination);
 }
 
 /**
@@ -53,7 +54,21 @@ SDES::SDES(std::string fileOpen, std::string fileDestination, std::string key) {
  * @param fileOpen Arquivo para abrir
  * @param key Chave principal
  */
-SDES::SDES(std::string fileOpen, std::string key) {}
+SDES::SDES(std::string fileOpen, std::string key) {
+  KeyGenerationDes subChaves(key);
+  OpenFile arquivoTexto(fileOpen);
+  std::vector<char> textoDecodficado;
+  for (auto i(0u); i < arquivoTexto.getText().size(); ++i) {
+    DecodeDes decodificado(arquivoTexto.getText()[i], subChaves.getSubKey(1),
+                           subChaves.getSubKey(2));
+    textoDecodficado.push_back(decodificado.getFinalPlaintext());
+  }
+  std::cout << std::endl;
+  for (char c : textoDecodficado) {
+    std::cout << c;
+  }
+  std::cout << std::endl;
+}
 
 /**
  * @brief Destroy the SDES::SDES object
