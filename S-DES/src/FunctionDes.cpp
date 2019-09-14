@@ -1,18 +1,16 @@
 /**
  * @file FunctionDes.cpp
  * @author Allan de Miranda Silva and Odilon Júlio dos Santos
- * @brief Métodos da classe FunctionDes
+ * @brief Métodos para class FunctionDes
  * @version 0.1
- * @date 10-09-2019
+ * @date 14-09-2019
  *
  * @copyright Copyright (c) 2019
  *
  */
 
 #include "FunctionDes.h"
-
-#include <string>  // std::string
-#include <vector>  // std::vector
+#include <bitset>  // std::bitset
 
 /**
  * @brief Construct a new Function Des:: Function Des object
@@ -27,55 +25,73 @@ FunctionDes::FunctionDes(void) {}
 FunctionDes::~FunctionDes(void) {}
 
 /**
- * @brief Obter lado esquerdo da chave
+ * @brief Permutar a chave
  *
- * @param key Chave inicial
- * @return std::string Lado esquerdo da chave inicial
+ * @param key Chave
+ * @param feistel Sequência de permutação
+ * @return std::string Chave permutada
  */
-std::string FunctionDes::keyLeft(std::string key) {
-  unsigned int sizeKey = key.size();
-  std::string finalKey;
-  for (auto i(0u); i < (sizeKey / 2); ++i) {
-    finalKey.push_back(key[i]);
+std::string FunctionDes::getPermutation(std::string key,
+                                        std::vector<unsigned int> feistel) {
+  for (unsigned int i = 0; i < feistel.size(); ++i) {
+    if (feistel[i] > 8) {
+      throw "Vetor Feistel contem elemento maior que tamanho da chave";
+    }
+    if (feistel[i] == 0) {
+      throw "Vetor Feistel contem elemento fora da chave";
+    }
   }
-  return finalKey;
+  std::string final_Key;
+  for (unsigned int position : feistel) {
+    final_Key.push_back(key[position - 1]);
+  }
+  return final_Key;
+}
+
+/**
+ * @brief Mover chave a esquerda
+ *
+ * @param key Chave de entrada
+ * @param repetition Quantidade de movimentações
+ * @return std::string Chave final
+ */
+std::string FunctionDes::getLS(std::string key, unsigned int repetition) {
+  if (key.size() == 0) {
+    throw "Insira uma chave com no mínimo um bit para operação LS";
+  }
+  for (auto i(0u); i < repetition; ++i) {
+    std::string last(1, key.back());  // char para string
+    key.insert(0, last);
+    key.pop_back();
+  }
+  return key;
 }
 
 /**
  * @brief Obter lado direito da chave
  *
- * @param key Chave inicial
- * @return std::string Lado direito da chave inicial
+ * @param key Chave de entrada
+ * @return std::string Lado direito da chave
  */
-std::string FunctionDes::keyRight(std::string key) {
-  unsigned int sizeKey = key.size();
+std::string FunctionDes::getKeyRight(std::string key) {
   std::string finalKey;
-  for (auto i(sizeKey / 2); i < sizeKey; ++i) {
+  for (auto i(key.size() / 2); i < key.size(); ++i) {
     finalKey.push_back(key[i]);
   }
   return finalKey;
 }
 
 /**
- * @brief Permutação de Feistel
+ * @brief Obter lado esquerdo da chave
  *
- * @param key Chave inicial
- * @param feistel Sequência de Feistel
- * @return std::string Chave final
+ * @param key Chave de entrada
+ * @return std::string Lado direito da chave
  */
-std::string FunctionDes::permutation(std::string key,
-                                     std::vector<unsigned int> feistel) {
-  for (auto i(0u); i < feistel.size(); ++i) {
-    if (feistel[i] > key.size()) {
-      throw "Vetor Feistel contem elemento maior que tamanho da chave";
-    }
-    if (feistel[i] == 0) {
-      throw "Vetor Feistel contem elemento menor que tamanho da chave";
-    }
-  }
+std::string FunctionDes::getKeyRight(std::string key) {
+  std::string key_string = std::bitset<8>(key).to_string();
   std::string finalKey;
-  for (unsigned int position : feistel) {
-    finalKey.push_back(key[position - 1]);
+  for (auto i(0u); i < (key_string.size() / 2); ++i) {
+    finalKey.push_back(key_string[i]);
   }
   return finalKey;
 }
@@ -87,7 +103,8 @@ std::string FunctionDes::permutation(std::string key,
  * @param subKey Sub chave gerada
  * @return std::string
  */
-std::string FunctionDes::xorOperation(std::string epKey, std::string subKey) {
+std::string FunctionDes::getXorOperation(std::string epKey,
+                                         std::string subKey) {
   if (epKey.size() != subKey.size()) {
     throw "Tamanho das chaves diferentes para operação xor";
   } else {
@@ -110,14 +127,14 @@ std::string FunctionDes::xorOperation(std::string epKey, std::string subKey) {
  * @param sBox
  * @return std::string
  */
-std::string FunctionDes::sBox(std::string key,
-                              std::vector<std::vector<unsigned int>> sBox) {
+std::string FunctionDes::getSBox(std::string key,
+                                 std::vector<std::vector<unsigned int>> sBox) {
   if (key.size() != 4) {
     throw "Tamanho da chave é incompatível com a operação";
   } else {
-    std::string lineSBOX = keyLeft(key);
+    std::string lineSBOX = getKeyLeft(key);
     unsigned int numberLine;
-    std::string colSBOX = keyRight(key);
+    std::string colSBOX = getKeyRight(key);
     unsigned int numberCol;
     if (lineSBOX == "00") {
       numberLine = 0;

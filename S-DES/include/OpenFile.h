@@ -12,18 +12,14 @@
 #ifndef OPENFILE_H_
 #define OPENFILE_H_
 
-#include <fstream>   // std::ifstream
-#include <iostream>  // std::cerr
 #include <string>    // std::string
 #include <vector>    // std::vector
 
 class OpenFile {
  private:
   std::vector<char> text;                  // Texto final
-  void setText(std::vector<char>);         // Definir texto
-  std::string fileName;                    // Nome do arquivo
+  void setText(std::vector<char>);         // Definir textoo
   std::vector<char> getFile(std::string);  // Obter arquivo
-  void setFileName(std::string);           // Definir nome do arquivo
 
  public:
   std::vector<char> getText(void);  // Ober texto

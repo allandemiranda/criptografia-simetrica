@@ -10,13 +10,15 @@
  */
 
 #include "OpenFile.h"
+#include <fstream>   // std::ifstream
+#include <iostream>  // std::cerr
 
 /**
  * @brief Construct a new Open File:: Open File object
  *
  * @param file_name Nome do arquivo a ser lido
  */
-OpenFile::OpenFile(std::string file_name) {}
+OpenFile::OpenFile(std::string file_name) { setText(getFile(file_name)); }
 
 /**
  * @brief Destroy the Open File:: Open File object
@@ -54,19 +56,6 @@ std::vector<char> OpenFile::getFile(std::string file_name) {
     std::cerr << "Erro ao abrir arquivo de texto" << std::endl;
   }
   return text_f;
-}
-
-/**
- * @brief Set the File Name object
- *
- * @param file_name Nome do arquivo
- */
-void OpenFile::setFileName(std::string file_name) {
-  if (file_name.size() == 0) {
-    throw "Erro! Nome de arquivo incorreto";
-  } else {
-    fileName = file_name;
-  }
 }
 
 /**
