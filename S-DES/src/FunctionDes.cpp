@@ -31,10 +31,11 @@ FunctionDes::~FunctionDes(void) {}
  * @param feistel Sequência de permutação
  * @return std::string Chave permutada
  */
+#include <iostream>
 std::string FunctionDes::getPermutation(std::string key,
                                         std::vector<unsigned int> feistel) {
   for (unsigned int i = 0; i < feistel.size(); ++i) {
-    if (feistel[i] > 8) {
+    if (feistel[i] > key.size()) {
       throw "Vetor Feistel contem elemento maior que tamanho da chave";
     }
     if (feistel[i] == 0) {
@@ -87,11 +88,10 @@ std::string FunctionDes::getKeyRight(std::string key) {
  * @param key Chave de entrada
  * @return std::string Lado direito da chave
  */
-std::string FunctionDes::getKeyRight(std::string key) {
-  std::string key_string = std::bitset<8>(key).to_string();
+std::string FunctionDes::getKeyLeft(std::string key) {
   std::string finalKey;
-  for (auto i(0u); i < (key_string.size() / 2); ++i) {
-    finalKey.push_back(key_string[i]);
+  for (auto i(0u); i < (key.size() / 2); ++i) {
+    finalKey.push_back(key[i]);
   }
   return finalKey;
 }

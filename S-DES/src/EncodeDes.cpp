@@ -20,6 +20,7 @@
  * @param keyOne Sub chave um
  * @param keyTwo Sub chave dois
  */
+#include <iostream>
 EncodeDes::EncodeDes(char plaintext, char keyOne, char keyTwo) {
   std::string textBinary = std::bitset<8>(plaintext).to_string();
   std::string keyOne_s = std::bitset<8>(keyOne).to_string();
@@ -28,7 +29,7 @@ EncodeDes::EncodeDes(char plaintext, char keyOne, char keyTwo) {
   textBinary = getPermutation(textBinary, IP);
 
   std::string half = getKeyRight(textBinary);
-  half = getPermutation(half, EP);                                        // (1)
+  half = getPermutation(half, EP);                                        // (1)  
   half = getXorOperation(half, keyOne_s);                                 // (2)
   half = getSBox(getKeyLeft(half), S0) + getSBox(getKeyRight(half), S1);  // (3)
   half = getPermutation(half, P4);                                        // (4)
