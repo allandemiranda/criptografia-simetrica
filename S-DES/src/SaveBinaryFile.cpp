@@ -17,8 +17,10 @@
  * @brief Construct a new Save Binary File:: Save Binary File object
  *
  * @param binaryText Texto para ser gravado
+ * @param folder Destino do arquivo
  */
-SaveBinaryFile::SaveBinaryFile(std::vector<char> binaryText) {
+SaveBinaryFile::SaveBinaryFile(std::vector<char> binaryText,
+                               std::string folder) {
   std::ofstream newFile;
   newFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
   try {

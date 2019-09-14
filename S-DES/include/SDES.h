@@ -12,17 +12,53 @@
 #ifndef SDES_H_
 #define SDES_H_
 
+#include <bitset>  // std::bitset
+#include <string>  // std::string
+#include <vector>  // std::vector
+#include "DecodeDes.h"
+#include "EncodeDes.h"
+#include "KeyGenerationDes.h"
+#include "OpenFile.h"
+#include "SaveBinaryFile.h"
 
 class SDES {
- private:
-  /* data */
  public:
-  SDES(/* args */);
-  ~SDES();
+  SDES(std::string, std::string, std::string);
+  SDES(std::string, std::string);
+  ~SDES(void);
 };
 
-SDES::SDES(/* args */) {}
+/**
+ * @brief Construct a new SDES::SDES object
+ *
+ * @param fileOpen Arquivo para abrir
+ * @param fileDestination Arquivo para salvar
+ * @param key Chave principal
+ */
+SDES::SDES(std::string fileOpen, std::string fileDestination, std::string key) {
+  KeyGenerationDes subChaves(key);
+  OpenFile arquivoTexto(fileOpen);
+  std::vector<char> textoCodficado;
+  for (auto i(0u); i < arquivoTexto.getText().size(); ++i) {
+    EncodeDes codificado(arquivoTexto.getText()[i], subChaves.getSubKey(1),
+                         subChaves.getSubKey(2));
+    textoCodficado.push_back(codificado.getFinalPlaintext());
+  }
+  SaveBinaryFile salvarBinario(textoCodficado,fileDestination);
+}
 
-SDES::~SDES() {}
+/**
+ * @brief Construct a new SDES::SDES object
+ *
+ * @param fileOpen Arquivo para abrir
+ * @param key Chave principal
+ */
+SDES::SDES(std::string fileOpen, std::string key) {}
+
+/**
+ * @brief Destroy the SDES::SDES object
+ *
+ */
+SDES::~SDES(void) {}
 
 #endif

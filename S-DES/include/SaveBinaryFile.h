@@ -16,11 +16,8 @@
 #include <vector>  // std::vector
 
 class SaveBinaryFile {
- private:
-  std::string folder = "out/TextoCodificado.txt";  // Destino do arquivo
-
  public:
-  SaveBinaryFile(std::vector<char>);
+  SaveBinaryFile(std::vector<char>, std::string);
   ~SaveBinaryFile(void);
 };
 
