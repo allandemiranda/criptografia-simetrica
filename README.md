@@ -1,6 +1,6 @@
 # Atividade Prática – S-DES
 
-Desenvolvido  por   [Allan de Miranda](https://github.com/allandemiranda)
+Desenvolvido  por   [Allan de Miranda](https://github.com/allandemiranda) e
                     [Odilon Júlio](https://github.com/OdilonJulio)       
 
 11 de setembro de 2019 - Segurança de Redes - IMD
