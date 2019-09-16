@@ -81,7 +81,7 @@ Ex: `./bin/main.o chat 192.168.0.101`
 2. `cd criptografia-simetrica/` 
 3. `./bin/main.o chatDH <ip do parceiro>` 
 
-Ex: `./bin/main.o chat 192.168.0.101` 
+Ex: `./bin/main.o chatDH 192.168.0.101` 
 
 ## Como modificar criptografia no Chat com Diffie-Hellman
 
